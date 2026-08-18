@@ -32,9 +32,9 @@ app.use("/api/payments", paymentRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`));
-
+// const PORT = process.env.PORT || 5000;
+// app.listen(PORT, () => console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`));
+module.exports = app;
 // Safety-net background job: every 2 minutes, release any product reservations
 // that expired because a buyer abandoned checkout without retrying or cancelling.
 setInterval(async () => {
