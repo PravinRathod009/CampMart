@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  height: 100%;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden; /* safety net against accidental horizontal scroll */
+}
+
+@layer base {
+  body {
+    @apply bg-gray-50 text-gray-800 transition-colors duration-200;
+  }
+  .dark body {
+    @apply bg-gray-950 text-gray-100;
+  }
+}
+
+/* Visible, accessible focus ring on keyboard navigation (not on mouse click) */
+:focus-visible {
+  outline: 2px solid #16a34a;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Consistent tap targets on touch devices */
+button, a, input, select, textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-white font-semibold rounded-lg px-4 py-2.5 hover:bg-primary-dark active:scale-[0.98] transition-all duration-150 disabled:opacity-50 disabled:pointer-events-none;
+  }
+  .btn-secondary {
+    @apply bg-white border border-gray-300 text-gray-700 font-semibold rounded-lg px-4 py-2.5 hover:bg-gray-50 active:scale-[0.98] transition-all duration-150 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-700;
+  }
+  .btn-outline-primary {
+    @apply border border-primary text-primary font-semibold rounded-lg px-4 py-2.5 hover:bg-primary-light active:scale-[0.98] transition-all duration-150 dark:hover:bg-primary/10;
+  }
+  .input-field {
+    @apply w-full border border-gray-300 rounded-lg px-3.5 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 dark:placeholder:text-gray-500;
+  }
+  .card {
+    @apply bg-white rounded-xl shadow-card border border-gray-100 dark:bg-gray-900 dark:border-gray-800;
+  }
+}
+
+/* Hide scrollbar for horizontally scrollable chip rows (still scrollable, just visually clean) */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Simple shimmer animation for skeleton loading states */
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, #eee 25%, #f5f5f5 37%, #eee 63%);
+  background-size: 800px 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+.dark .skeleton {
+  background: linear-gradient(90deg, #1f2937 25%, #27303f 37%, #1f2937 63%);
+  background-size: 800px 100%;
+}
